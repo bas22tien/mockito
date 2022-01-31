@@ -18,7 +18,7 @@ describe("Test suit",function(){
                 mock.verify();
 
         })
-        it("spy test the add method",function(){
+        /*it("spy test the add method",function(){
                 var spy = sinon.spy(myObject, "add");
                 myObject.callAnotherFn(10,20);
                 sinon.assert.calledOnce(spy);
@@ -26,6 +26,14 @@ describe("Test suit",function(){
                 expect(spy.calledWith(10,20)).to.be.true;
                 
 
-        })
+        })*/
+        it("stub test the add method",function(){
+                var stub = sinon.stub(myObject, "add");
+                stub.withArgs(10,20).onFirstCall().returns(100)
+                .onSecondCall().returns(200);
+                expect(myObject.add(10,20)).to.be.equal(100);
+                expect(myObject.add(10,20)).to.be.equal(200);
+                expect(myObject.add(10,20)).to.be.equal(30);
 
+        })
 })
